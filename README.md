@@ -8,7 +8,7 @@ and [Minecraft](https://www.minecraft.net/en-us).
 
 The MIMIC prototype implemented in JavaScript can be found [here](https://github.com/Mimic-Persona/MIMIC).
 
-For more details about this project, please refer to our [HomePage](https://mimic-persona.github.io/MIMIC-Home-Page/).
+For more details about this project, please refer to our [HomePage](https://mimic-persona.github.io/MIMIC-Py-Home-Page/).
 
 This project should be interpreted by [Python 3.12](https://www.python.org/downloads/release/python-3123/) (Python 3.12.3 tested).
 
