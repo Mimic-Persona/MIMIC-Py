@@ -36,8 +36,8 @@ Since this game is a closed-source game, we can only run MIMIC-Py through a thir
 
 ## Install Node.js and Dependencies
 1. Make sure you have [Node.js (LTS only)](https://nodejs.org/) installed on your machine.
-   - **Important:** Please install a **Node.js LTS version (e.g., 18.x or 20.x)**
-   - Newer Node versions (e.g., 21+, 25) are **not supported** due to incompatibilities with `mineflayer` (e.g., deprecated `SlowBuffer`), which may cause the Mineflayer subprocess to fail at runtime.
+   - **Important:** Please install a **Node.js LTS version (e.g., 22.x or 24.x)**
+   - Newer Node versions (e.g., 25) are **not supported** due to incompatibilities with `mineflayer` (e.g., deprecated `SlowBuffer`), which may cause the Mineflayer subprocess to fail at runtime.
 
 2. We recommend using a version manager such as `nvm`:
    ```bash
