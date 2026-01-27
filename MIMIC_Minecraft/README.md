@@ -35,33 +35,46 @@ Since this game is a closed-source game, we can only run MIMIC-Py through a thir
 5. Then you can jump to Section [Start the Server](#start-the-server) to set up the Minecraft server and run MIMIC-Py.
 
 ## Install Node.js and Dependencies
-1. Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
+1. Make sure you have [Node.js (LTS only)](https://nodejs.org/) installed on your machine.
+   - **Important:** Please install a **Node.js LTS version (e.g., 18.x or 20.x)**
+   - Newer Node versions (e.g., 21+, 25) are **not supported** due to incompatibilities with `mineflayer` (e.g., deprecated `SlowBuffer`), which may cause the Mineflayer subprocess to fail at runtime.
 
-2. Open a new terminal and navigate to the `./MIMIC_Minecraft` directory.
+2. We recommend using a version manager such as `nvm`:
+   ```bash
+   nvm install --lts
+   nvm use --lts
+   ```
+
+3. Open a new terminal and navigate to the `./MIMIC_Minecraft` directory.
     ```bash
     cd ./MIMIC_Minecraft
     ```
 
-3. Install the required dependencies by running the following command:
+4. Install the required dependencies by running the following command:
     ```bash
     npm install chromadb@1.10.5
     npm install
     ```
 
-4. Navigate to the `./MIMIC_Minecraft/mc_env/mineflayer` directory and install the dependencies for a modified version of [Mineflayer](https://github.com/PrismarineJS/mineflayer) (a third-party API library to interact with Minecraft):
-    ```bash
-    cd ./mc_env/mineflayer
-    npm install
-    ```
-
 5. Navigate to the `./MIMIC_Minecraft/mc_env/mineflayer/mineflayer-collectblock` directory and install the dependencies for the modified version of from [Wang et al.](https://github.com/MineDojo/Voyager) `mineflayer-collectblock` plugin:
-    ```bash
-    cd ./mineflayer-collectblock
-    npm install
-    ```
+   ```bash
+   cd ./mineflayer-collectblock
+   npm install
+   ```
 
-6. If compatibility issues arise during execution, delete the `node_modules` folders in all three directories above and reinstall the dependencies following the same steps.
+6. Navigate to the `./MIMIC_Minecraft/mc_env/mineflayer` directory and install the dependencies for a modified version of [Mineflayer](https://github.com/PrismarineJS/mineflayer) (a third-party API library to interact with Minecraft):
+   ```bash
+   cd ./mc_env/mineflayer
+   npm install
+   ```
+   
+7. If compatibility issues arise, remove all `node_modules` directories in the paths above and reinstall dependencies:
+   ```bash
+   rm -rf node_modules
+   npm install
+   ```
 
+8. Note that if you revived `MODULE_NOT_FOUND` error for `mineflayer-collectblock`, please try to reinstall the `mineflayer` package after making sure the `mineflayer-collectblock` is correctly built from step 5.
 
 ## Install the Game
 Download and install Minecraft from the [official website](https://www.minecraft.net/en-us/download).
