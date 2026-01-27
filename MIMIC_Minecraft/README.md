@@ -58,7 +58,7 @@ Since this game is a closed-source game, we can only run MIMIC-Py through a thir
 
 5. Navigate to the `./MIMIC_Minecraft/mc_env/mineflayer/mineflayer-collectblock` directory and install the dependencies for the modified version of from [Wang et al.](https://github.com/MineDojo/Voyager) `mineflayer-collectblock` plugin:
    ```bash
-   cd ./mineflayer-collectblock
+   cd ./mc_env/mineflayer/mineflayer-collectblock
    npm install
    ```
 
