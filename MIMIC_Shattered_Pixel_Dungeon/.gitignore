@@ -36,6 +36,7 @@ bin/
 .classpath
 .settings/
 jacoco-reports/
+jacoco-reports-action-jsonl/
 jacoco-reports-html/
 jacoco-reports-html-merged/
 jacoco-reports-merged/

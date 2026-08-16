@@ -48,6 +48,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Ghoul;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Snake;
 import com.shatteredpixel.shatteredpixeldungeon.agent.GameServer;
+import com.shatteredpixel.shatteredpixeldungeon.agent.jacocoReporter.JacocoRuntimeReporter;
 import com.shatteredpixel.shatteredpixeldungeon.agent.monkey.MonkeyAPI;
 import com.shatteredpixel.shatteredpixeldungeon.effects.BannerSprites;
 import com.shatteredpixel.shatteredpixeldungeon.effects.BlobEmitter;
@@ -837,7 +838,7 @@ public class GameScene extends PixelScene {
 					// Some prevAction is empty because the error occurred before the action
 					if ((!Dungeon.prevAction.isEmpty() && Dungeon.hero.ready && GameScene.isUpdated) ||
 							(!GLog.ERR_MSG.isEmpty() && GameScene.isUpdated)) {
-						Dungeon.agentActionCounter++;
+						Dungeon.actionCounter++;
 
 						// Send the logs, errors and status to the agentClient
 						JSONObject feedback = new JSONObject();
@@ -846,22 +847,11 @@ public class GameScene extends PixelScene {
 						feedback.put("errors", GLog.ERR_MSG);
 						Dungeon.gameServer.broadcast(feedback.toString());
 
-//						// Send the report request to the reportClient
-//						report.put("msgType", "report");
-//						report.put("actionCounter", Dungeon.agentActionCounter + 1);
-//						report.put("action", Dungeon.prevAction.toString());
-//						report.put("env", Dungeon.prevEnv);
-//						Dungeon.gameServer.broadcast(report.toString());
+						if (IS_IN_EXP) {
+							JacocoRuntimeReporter.dumpData(Dungeon.actionCounter + 1, Dungeon.prevAction.toString(), Dungeon.prevEnv);
+						}
 
 						GLog.c("======================================================================== Action #" + (actionCounter) + " ========================================================================");
-
-						try {
-							if (IS_IN_EXP)
-								dumpData(actionCounter, Dungeon.prevAction.toString(), Dungeon.prevEnv);
-
-						} catch (IOException  | JSONException e) {
-							e.printStackTrace();
-						}
 
 						isUpdated = false;
 						Dungeon.prevAction = new JSONObject();
@@ -879,12 +869,8 @@ public class GameScene extends PixelScene {
 					if (!Dungeon.prevAction.isEmpty()) {
 						GLog.c("======================================================================== Action #" + (actionCounter + 1) + " ========================================================================");
 
-						try {
-							if (IS_IN_EXP)
-								dumpData(actionCounter + 1, Dungeon.prevAction.toString(), Dungeon.prevEnv);
-
-						} catch (IOException  | JSONException e) {
-							e.printStackTrace();
+						if (IS_IN_EXP) {
+							JacocoRuntimeReporter.dumpData(Dungeon.actionCounter + 1, Dungeon.prevAction.toString(), Dungeon.prevEnv);
 						}
 
 					} else {

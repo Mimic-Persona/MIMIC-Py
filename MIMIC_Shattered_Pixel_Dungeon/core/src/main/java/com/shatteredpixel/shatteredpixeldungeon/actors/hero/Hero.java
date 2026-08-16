@@ -173,6 +173,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 
+import static com.shatteredpixel.shatteredpixeldungeon.Dungeon.IS_IN_EXP;
+import static com.shatteredpixel.shatteredpixeldungeon.agent.jacocoReporter.JacocoRuntimeReporter.dumpData;
+
 public class Hero extends Char {
 
 	{
@@ -361,21 +364,16 @@ public class Hero extends Char {
 
 		GLog.c("======================================================================== Action #" + (Dungeon.actionCounter + 1) + " ========================================================================");
 
-		JSONObject report = new JSONObject();
-
-		report.put("msgType", "report");
-		report.put("actionCounter", Dungeon.actionCounter + 1);
-		report.put("action", prevAction.toString());
-		report.put("env", Status.getStatus().toString());
-
-		Dungeon.gameServer.broadcast(report.toString());
-
 		for (LinkedHashMap<Talent, Integer> tier : talents){
 			for (Talent f : tier.keySet()){
 				if (f == talent) tier.put(talent, tier.get(talent)+1);
 			}
 		}
 		Talent.onTalentUpgraded(this, talent);
+
+		if (IS_IN_EXP) {
+			dumpData(Dungeon.actionCounter + 1, prevAction.toString(), Status.getStatus().toString());
+		}
 	}
 
 	public int talentPointsSpent(int tier){

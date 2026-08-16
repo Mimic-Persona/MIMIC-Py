@@ -1,12 +1,12 @@
 import os
 
 from datetime import datetime
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
 from utils.file_utils import append_file, write_file
 from utils.utils import system_say
 
-load_dotenv()
+load_dotenv(find_dotenv(), override=True)
 
 GAME_SUBJECT = os.getenv("GAME_SUBJECT", "default")
 AGENT_NAME = os.getenv("AGENT_NAME", "default")

@@ -24,9 +24,10 @@ public class MonkeyAPI {
     public static final int MAX_ACTIONS = Integer.MAX_VALUE; // Define the maximum number of actions for the monkey
 
     static Dotenv dotenv = Dotenv.configure()
-            .directory("../../.env")
+            .directory("../../")
+            .filename(".env")
             .load();
-    public static boolean WITH_PRECONDITION = Boolean.parseBoolean(dotenv.get("IS_SMART_MONKEY"));;
+    public static boolean WITH_PRECONDITION = Boolean.parseBoolean(dotenv.get("IS_SMART_MONKEY"));
 
     /**
      * Handle the smart monkey's action.

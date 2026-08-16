@@ -66,7 +66,8 @@ import static com.shatteredpixel.shatteredpixeldungeon.agent.utils.JsonUtils.jso
 
 public class PixelScene extends Scene {
 	static Dotenv dotenv = Dotenv.configure()
-			.directory("../../.env")
+			.directory("../../")
+			.filename(".env")
 			.load();
 	public static final String SOCKET_HOST = dotenv.get("SOCKET_HOST");
 	public static final int SOCKET_PORT = Integer.parseInt(dotenv.get("SOCKET_PORT"));

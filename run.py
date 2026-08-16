@@ -1,7 +1,7 @@
 import os
 import time
 
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
 from MIMIC_Minecraft.mc_env.MineEnv import MineEnv
 from bot_components.HybridActions import HybridActions
@@ -13,7 +13,7 @@ from utils.SocketWS import SocketWS
 
 
 def run():
-    load_dotenv()
+    load_dotenv(find_dotenv(), override=True)
 
     # Initialize code executor for the Action Executor - Plan-to-Code module if needed
     code_executor = None

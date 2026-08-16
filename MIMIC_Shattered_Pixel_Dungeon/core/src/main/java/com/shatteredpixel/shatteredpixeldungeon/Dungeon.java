@@ -105,13 +105,15 @@ public class Dungeon {
 	public static final long DURATION = Long.MAX_VALUE;
 	// TODO: Define this whenever the game is restarted during the experiment;
 	//  START A NEW GAME INSTEAD OF CONTINUING
-	public static long PRESET_SEED = -1; // Define the seed for the experiment // public static final int currSeed = 2627756772653L;
+	public static long PRESET_SEED = -1; // Define the seed for the experiment
+	// public static final int currSeed = 2627756772653L;
 	public static final long MONKEY_INTERVAL = 400; // TODO: CHANGED
 
 	static Dotenv dotenv = Dotenv.configure()
-			.directory("../../.env")
+			.directory("../../")
+			.filename(".env")
 			.load();
-	public static boolean IS_IN_EXP = Boolean.parseBoolean(dotenv.get("IS_IN_EXP"));;
+	public static boolean IS_IN_EXP = Boolean.parseBoolean(dotenv.get("IS_IN_EXP"));
 
 	// Create a public static stack and initialize it with random long numbers within a range
 	public static Stack<Long> stack = RandomSeedCreator.generateRandomLongStack();
@@ -139,7 +141,6 @@ public class Dungeon {
 
 	public static int waitCounter = 0;
 	public static int waitTurns = 0;
-	public static int agentActionCounter = -2; // 3289 for the Agg. first action
 
 	//enum of items which have limited spawns, records how many have spawned
 	//could all be their own separate numbers, but this allows iterating, much nicer for bundling/initializing.

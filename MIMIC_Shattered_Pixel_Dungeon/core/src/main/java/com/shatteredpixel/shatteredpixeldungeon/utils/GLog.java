@@ -47,8 +47,8 @@ public class GLog {
 	public static final String NEW_LINE	    = "\n";
 
 	public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
-	private static final String OUT_PATH = "../../out/SPD/out_" + LocalDateTime.now().format(formatter) + "_" + ReporterClient.PREFIX + ".log";
-	private static final String COV_PATH = "../../cov/SPD/cov_" + LocalDateTime.now().format(formatter) + "_" + ReporterClient.PREFIX + ".log";
+	private static final String OUT_PATH = "../../out/SPD/logs/out_" + LocalDateTime.now().format(formatter) + "_" + ReporterClient.PREFIX + ".log";
+	private static final String COV_PATH = "../../out/SPD/cov_logs/cov_" + LocalDateTime.now().format(formatter) + "_" + ReporterClient.PREFIX + ".log";
 	private static boolean isFirstLog = true;
 
 	// Reset
