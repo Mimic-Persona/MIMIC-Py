@@ -64,7 +64,7 @@ public class GameServer extends WebSocketServer {
         }
 
         else if (message.startsWith("ACTION: ")) {
-            GLog.c("======================================================================== Action #" + (Dungeon.agentActionCounter + 2) + " ========================================================================");
+            GLog.c("======================================================================== Action #" + (Dungeon.agentActionCounter + 1) + " ========================================================================");
 
             JSONObject newPlan = null;
 
