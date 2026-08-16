@@ -35,10 +35,15 @@ public final class JacocoRuntimeReporter {
 
     private static final String AGENT_NAME = getRequiredEnv("AGENT_NAME");
 
-    private static final String JSONL_OUTPUT_PATH = getEnvOrDefault(
-            "JACOCO_ACTION_JSONL",
-            "../../out/SPD/jacoco-reports-action-jsonl/" + AGENT_NAME + "_actions.jsonl"
-    );
+    // JSONL path now includes date prefix
+    private static String getJsonlOutputPath() {
+        String date = LocalDate.now().format(DATE_FORMAT);
+        String baseDir = getEnvOrDefault(
+                "JACOCO_ACTION_JSONL_DIR",
+                "../../out/SPD/jacoco-reports-action-jsonl"
+        );
+        return baseDir + "/" + date + "_" + AGENT_NAME + "_actions.jsonl";
+    }
 
     private static final String EXEC_OUTPUT_DIR = getEnvOrDefault(
             "JACOCO_EXEC_DIR",
@@ -84,13 +89,19 @@ public final class JacocoRuntimeReporter {
         for (int attempt = 1; attempt <= maxRetries; attempt++) {
             try {
                 long currentTimestamp = currentTimestampSinceYearStartMillis();
-                appendActionJsonl(actionCounter, action, env, currentTimestamp);
+                String jsonlPath = getJsonlOutputPath();
+                appendActionJsonl(actionCounter, action, env, currentTimestamp, jsonlPath);
 
                 String date = LocalDate.now().format(DATE_FORMAT);
                 String baseName = AGENT_NAME + "_" + date + "_" + currentTimestamp;
 
                 File execDir = new File(EXEC_OUTPUT_DIR);
                 ensureDirectory(execDir);
+
+                // Find the last cumulative exec file in the directory if not already loaded
+                if (lastCumulativeExecFile == null || !lastCumulativeExecFile.exists()) {
+                    lastCumulativeExecFile = findLatestCumulativeExecFile(execDir);
+                }
 
                 File deltaExec = new File(execDir, baseName + "_delta.exec");
                 File cumulativeExec = new File(execDir, baseName + ".exec");
@@ -103,7 +114,7 @@ public final class JacocoRuntimeReporter {
                 }
 
                 lastCumulativeExecFile = cumulativeExec;
-                DumpResult result = new DumpResult(cumulativeExec.getAbsolutePath(), JSONL_OUTPUT_PATH, currentTimestamp);
+                DumpResult result = new DumpResult(cumulativeExec.getAbsolutePath(), jsonlPath, currentTimestamp);
 
                 // Log dump result to console
                 GLog.cov("========================== Action #" + actionCounter + " Dumped ==========================");
@@ -176,8 +187,8 @@ public final class JacocoRuntimeReporter {
         }
     }
 
-    private static void appendActionJsonl(int actionCounter, String action, String env, long currentTimestamp) throws IOException {
-        File jsonlFile = new File(JSONL_OUTPUT_PATH);
+    private static void appendActionJsonl(int actionCounter, String action, String env, long currentTimestamp, String jsonlPath) throws IOException {
+        File jsonlFile = new File(jsonlPath);
         File parent = jsonlFile.getParentFile();
         if (parent != null) {
             ensureDirectory(parent);
@@ -193,6 +204,42 @@ public final class JacocoRuntimeReporter {
             writer.write(row.toString());
             writer.newLine();
         }
+    }
+
+    /**
+     * Finds the most recent cumulative exec file in the directory (excluding delta files).
+     * Returns null if no cumulative file is found.
+     */
+    private static File findLatestCumulativeExecFile(File execDir) {
+        if (!execDir.exists() || !execDir.isDirectory()) {
+            return null;
+        }
+
+        File[] execFiles = execDir.listFiles((dir, name) -> 
+            name.endsWith(".exec") && !name.contains("_delta.exec")
+        );
+
+        if (execFiles == null || execFiles.length == 0) {
+            return null;
+        }
+
+        // Find the file with the most recent modification time
+        File latest = null;
+        long latestTime = -1;
+
+        for (File file : execFiles) {
+            long modTime = file.lastModified();
+            if (modTime > latestTime) {
+                latestTime = modTime;
+                latest = file;
+            }
+        }
+
+        if (latest != null) {
+            System.out.println("Found previous cumulative exec file: " + latest.getAbsolutePath());
+        }
+
+        return latest;
     }
 
     private static void ensureDirectory(File dir) throws IOException {
