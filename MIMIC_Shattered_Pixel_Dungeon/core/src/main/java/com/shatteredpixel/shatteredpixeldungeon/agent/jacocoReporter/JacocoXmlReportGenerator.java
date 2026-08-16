@@ -375,7 +375,7 @@ public final class JacocoXmlReportGenerator {
         if (bundle.getInstructionCounter().getTotalCount() > 0) {
             double instructionCoverage = 100.0 * bundle.getInstructionCounter().getCoveredCount() 
                                         / bundle.getInstructionCounter().getTotalCount();
-            System.out.println(String.format("  Instruction Coverage: %.2f%%", instructionCoverage));
+            System.out.println(String.format("  Instruction Coverage: %.4f%%", instructionCoverage));
         }
         
         // Generate XML report
