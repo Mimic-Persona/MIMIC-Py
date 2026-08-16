@@ -836,7 +836,7 @@ public class GameScene extends PixelScene {
 					// Some prevAction is empty because the error occurred before the action
 					if ((!Dungeon.prevAction.isEmpty() && Dungeon.hero.ready && GameScene.isUpdated) ||
 							(!GLog.ERR_MSG.isEmpty() && GameScene.isUpdated)) {
-						Dungeon.actionCounter++;
+						Dungeon.agentActionCounter++;
 
 						// Send the logs, errors and status to the agentClient
 						JSONObject feedback = new JSONObject();
@@ -846,10 +846,10 @@ public class GameScene extends PixelScene {
 						Dungeon.gameServer.broadcast(feedback.toString());
 
 						if (IS_IN_EXP) {
-							JacocoRuntimeReporter.dumpData(Dungeon.actionCounter + 1, Dungeon.prevAction.toString(), Dungeon.prevEnv);
+							JacocoRuntimeReporter.dumpData(Dungeon.actionCounter, Dungeon.prevAction.toString(), Dungeon.prevEnv);
 						}
 
-						GLog.c("======================================================================== Action #" + (actionCounter) + " ========================================================================");
+//						GLog.c("======================================================================== Action #" + (actionCounter) + " ========================================================================");
 
 						isUpdated = false;
 						Dungeon.prevAction = new JSONObject();

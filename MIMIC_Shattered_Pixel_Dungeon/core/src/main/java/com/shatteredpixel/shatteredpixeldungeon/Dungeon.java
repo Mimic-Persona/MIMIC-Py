@@ -131,6 +131,7 @@ public class Dungeon {
 	public static boolean toReport = false;
 
 	public static int actionCounter = -2;
+	public static int agentActionCounter = -2;
 	public static JSONObject prevAction = new JSONObject();
 	public static String prevEnv = "";
 	public static boolean isGameServerOpen = false;
