@@ -289,3 +289,15 @@ All hero's information can be found [here](core/src/main/java/com/shatteredpixel
 - Remember, we are only using the character [Warrior](core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/warrior).
 
 All Information about mobs can be found [here](core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs).
+
+# How To Run Jacoco Code Coverage Tool
+1. Make sure you have completed the steps in the [Run the Game and Start the Server](./README.md#run-the-game-and-start-the-server) section.
+2. Make sure the `IS_IN_EXP` flag is set to `true` in your configuration.
+3. Before running the game, make sure you have set the `AGENT_NAME` to:
+   1. A new name if you want to start a new experiment, or
+   2. The same name as the previous experiment if you want to continue the previous experiment (remember, all the coverage data will be cumulative from the previous experiment in this case).
+4. Run the game and start the server by pressing `G` on your keyboard while playing the game, or by pressing `B` for MIMIC-Py, or by pressing `L` for MIMIC-P or MIMIC-P+S.
+5. After the experiment is finished, you can find the Jacoco coverage data in the `./jacoco` directory. The coverage data will be saved under `~/MIMIC-Py/out/SPD/java-reports/[AGENT_NAME]/`, 
+and the action data will be saved under `~/MIMIC-Py/out/SPD/java-reports-action-jsonl/`. 
+   1. All the generated Jacoco coverage reports are in the form of `.exec` files, which can be converted to `.html` or `.xml` files using the Jacoco CLI tool.
+6. To fetch the coverage, please configure `AGENT_NAME` in [JacocoCoverageCsvExporter](./core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/agent/jacocoReporter/JacocoCoverageCsvExporter.java) and run it.
