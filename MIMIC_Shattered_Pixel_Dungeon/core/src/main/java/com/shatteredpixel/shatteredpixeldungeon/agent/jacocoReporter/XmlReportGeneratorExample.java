@@ -11,6 +11,8 @@ public class XmlReportGeneratorExample {
 
     public static void main(String[] args) {
         try {
+            System.out.println("=== JaCoCo XML Report Generator - Examples ===\n");
+
             // Example 1: Generate all reports (every file)
             example1_GenerateAllReports();
 
@@ -25,6 +27,23 @@ public class XmlReportGeneratorExample {
 
             // Example 5: Save exclusion lists
             example5_SaveExclusionLists();
+
+            // Example 6: Generate a single report
+            example6_SingleReport();
+
+            // Example 7: Full workflow
+            example7_FullWorkflow();
+
+            // Example 8: Time range processing
+            example8_TimeRangeProcessing();
+
+            // Example 9: Verify exclusions are working (NEW)
+            example9_VerifyExclusions();
+
+            // Example 10: Generate report with statistics (NEW)
+            example10_GenerateWithStatistics();
+
+            System.out.println("\n=== All Examples Completed ===");
 
         } catch (IOException e) {
             System.err.println("Error generating reports: " + e.getMessage());
@@ -227,6 +246,76 @@ public class XmlReportGeneratorExample {
         // 3. Run generateReports on that directory
         // or
         // 1. Process each file individually with generateSingleReport
+    }
+
+    /**
+     * Example 9: Verify exclusions are working correctly.
+     * Demonstrates the new printExclusionSummary() method.
+     */
+    private static void example9_VerifyExclusions() {
+        System.out.println("\n=== Example 9: Verify Exclusions ===");
+
+        // Print what packages and classes are excluded
+        JacocoXmlReportGenerator.printExclusionSummary();
+
+        System.out.println("The above exclusions are applied during analysis.");
+        System.out.println("This means when you fetch total coverage from XML reports,");
+        System.out.println("these packages/classes are NOT included in the totals.");
+        System.out.println("No post-processing needed!");
+    }
+
+    /**
+     * Example 10: Generate report with statistics to verify totals.
+     * Demonstrates the new generateSingleReportWithStats() method.
+     * This is useful to confirm that exclusions are properly applied to totals.
+     */
+    private static void example10_GenerateWithStatistics() throws IOException {
+        System.out.println("\n=== Example 10: Generate Report with Statistics ===");
+
+        // Find any exec file in the default directory
+        File execDir = new File("../../out/SPD/jacoco-reports");
+        if (!execDir.exists()) {
+            System.out.println("Exec directory does not exist, skipping example 10");
+            return;
+        }
+
+        // Try to find the agent subdirectory
+        File[] agentDirs = execDir.listFiles(File::isDirectory);
+        if (agentDirs == null || agentDirs.length == 0) {
+            System.out.println("No agent directories found, skipping example 10");
+            return;
+        }
+
+        File agentDir = agentDirs[0]; // Use first agent directory
+        File[] execFiles = agentDir.listFiles((dir, name) -> 
+            name.endsWith(".exec") && !name.contains("_delta.exec"));
+
+        if (execFiles == null || execFiles.length == 0) {
+            System.out.println("No exec files found in " + agentDir.getName());
+            System.out.println("Skipping example 10");
+            return;
+        }
+
+        // Use the first exec file
+        File execFile = execFiles[0];
+        File xmlFile = new File("../../out/SPD/jacoco-xml-reports/example_with_stats.xml");
+
+        // Ensure output directory exists
+        File xmlDir = xmlFile.getParentFile();
+        if (!xmlDir.exists() && !xmlDir.mkdirs()) {
+            throw new IOException("Failed to create XML output directory");
+        }
+
+        // Generate report with statistics
+        JacocoXmlReportGenerator.ReportConfig config = 
+            new JacocoXmlReportGenerator.ReportConfigBuilder().build();
+
+        System.out.println("Generating report for: " + execFile.getName());
+        JacocoXmlReportGenerator.generateSingleReportWithStats(execFile, xmlFile, config);
+
+        System.out.println("\nThe statistics shown above are AFTER exclusions are applied.");
+        System.out.println("When you parse the XML to fetch totals, you'll get the same numbers.");
+        System.out.println("This confirms that exclusions affect the total coverage calculations!");
     }
 }
 
