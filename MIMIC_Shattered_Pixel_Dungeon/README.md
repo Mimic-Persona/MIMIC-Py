@@ -10,10 +10,13 @@ Shattered Pixel Dungeon compiles for Android, iOS, and Desktop platforms.
 
 This game is a modified version dedicated to MIMIC-Py, check the original game at https://github.com/00-Evan/shattered-pixel-dungeon on [**v2.4.0**](https://github.com/00-Evan/shattered-pixel-dungeon/compare/v2.4.0...3.1.0-BETA)
 
+# UPDATE
+- 2026-08-16: MacOS support is added for MIMIC-Py in SPD, now you can run MIMIC-Py on both Windows and MacOS.
+
 # How to Run MIMIC-Py
 
 ## Prerequisites
-- This game supports running on Windows, Android, and IOS. But the MIMIC-Py agent for SPD is only tested on Windows.
+- This game supports running on Windows, MacOS, Android, and IOS. But the MIMIC-Py agent for SPD is only tested on Windows.
 
 ## IMPORTANT
 - Make sure your working directory is set to the `MIMIC-Python` directory, as all commands and configurations will be based on this path.
