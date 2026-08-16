@@ -1,4 +1,4 @@
-package com.shatteredpixel.shatteredpixeldungeon.agent.reporter;
+package com.shatteredpixel.shatteredpixeldungeon.agent.legacyReporter;
 
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import org.apache.poi.ss.usermodel.Cell;
@@ -21,8 +21,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.shatteredpixel.shatteredpixeldungeon.agent.reporter.JacocoCoverageFetcher.fetchTotalCoverage;
-import static com.shatteredpixel.shatteredpixeldungeon.agent.reporter.JacocoReportGenerator.generateJacocoHtmlReport;
+import static com.shatteredpixel.shatteredpixeldungeon.agent.legacyReporter.JacocoCoverageFetcher.fetchTotalCoverage;
+import static com.shatteredpixel.shatteredpixeldungeon.agent.legacyReporter.JacocoReportGenerator.generateJacocoHtmlReport;
 import static com.shatteredpixel.shatteredpixeldungeon.agent.utils.FileHandler.appendToFile;
 
 

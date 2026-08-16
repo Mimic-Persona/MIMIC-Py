@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.shatteredpixel.shatteredpixeldungeon.agent.mergeReporter.TO_KEEP;
+import static com.shatteredpixel.shatteredpixeldungeon.agent.legacyReporter.mergeReporter.TO_KEEP;
 
 public class FileHandler {
 

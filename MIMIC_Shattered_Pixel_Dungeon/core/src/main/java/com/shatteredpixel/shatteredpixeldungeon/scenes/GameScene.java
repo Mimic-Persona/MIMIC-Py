@@ -145,7 +145,6 @@ import com.watabou.utils.Point;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
 import com.watabou.utils.RectF;
-import org.java_websocket.WebSocket;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -157,7 +156,6 @@ import java.util.Locale;
 import static com.shatteredpixel.shatteredpixeldungeon.Dungeon.IS_IN_EXP;
 import static com.shatteredpixel.shatteredpixeldungeon.Dungeon.actionCounter;
 import static com.shatteredpixel.shatteredpixeldungeon.agent.monkey.MonkeyAPI.MAX_ACTIONS;
-import static com.shatteredpixel.shatteredpixeldungeon.agent.reporter.JacocoReporter.dumpData;
 
 public class GameScene extends PixelScene {
 

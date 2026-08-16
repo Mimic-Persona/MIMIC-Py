@@ -1,4 +1,4 @@
-package com.shatteredpixel.shatteredpixeldungeon.agent.reporter;
+package com.shatteredpixel.shatteredpixeldungeon.agent.legacyReporter;
 
 import java.io.File;
 import java.io.IOException;

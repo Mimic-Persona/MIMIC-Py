@@ -41,7 +41,6 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Ghost;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Wandmaker;
 import com.shatteredpixel.shatteredpixeldungeon.agent.GameServer;
-import com.shatteredpixel.shatteredpixeldungeon.agent.reporter.ReporterClient;
 import com.shatteredpixel.shatteredpixeldungeon.agent.utils.RandomSeedCreator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Amulet;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
@@ -87,15 +86,12 @@ import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 import com.watabou.utils.SparseArray;
 import io.github.cdimascio.dotenv.Dotenv;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-import static com.shatteredpixel.shatteredpixeldungeon.agent.utils.JsonUtils.jsonFileToDictionary;
 
 public class Dungeon {
 

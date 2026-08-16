@@ -1,4 +1,4 @@
-package com.shatteredpixel.shatteredpixeldungeon.agent.reporter;
+package com.shatteredpixel.shatteredpixeldungeon.agent.legacyReporter;
 
 import com.shatteredpixel.shatteredpixeldungeon.agent.utils.directorHandler;
 import org.apache.commons.io.FileUtils;

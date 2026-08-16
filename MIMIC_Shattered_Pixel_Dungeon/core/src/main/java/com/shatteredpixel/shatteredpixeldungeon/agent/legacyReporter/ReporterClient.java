@@ -1,4 +1,4 @@
-package com.shatteredpixel.shatteredpixeldungeon.agent.reporter;
+package com.shatteredpixel.shatteredpixeldungeon.agent.legacyReporter;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -10,8 +10,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.URI;
 import java.util.*;
-
-import static com.shatteredpixel.shatteredpixeldungeon.agent.utils.JsonUtils.jsonFileToDictionary;
 
 public class ReporterClient extends WebSocketClient {
 

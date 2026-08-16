@@ -1,8 +1,5 @@
-package com.shatteredpixel.shatteredpixeldungeon.agent;
+package com.shatteredpixel.shatteredpixeldungeon.agent.legacyReporter;
 
-import com.shatteredpixel.shatteredpixeldungeon.agent.reporter.JacocoCoverageFetcher;
-import com.shatteredpixel.shatteredpixeldungeon.agent.reporter.JacocoReportGenerator;
-import com.shatteredpixel.shatteredpixeldungeon.agent.reporter.JacocoReporter;
 import com.shatteredpixel.shatteredpixeldungeon.agent.utils.directorHandler;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import org.apache.poi.openxml4j.util.ZipSecureFile;

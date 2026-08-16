@@ -1,8 +1,5 @@
-package com.shatteredpixel.shatteredpixeldungeon.agent;
+package com.shatteredpixel.shatteredpixeldungeon.agent.legacyReporter;
 
-import com.shatteredpixel.shatteredpixeldungeon.agent.reporter.JacocoCoverageFetcher;
-import com.shatteredpixel.shatteredpixeldungeon.agent.reporter.JacocoReportGenerator;
-import com.shatteredpixel.shatteredpixeldungeon.agent.reporter.JacocoReporter;
 import com.shatteredpixel.shatteredpixeldungeon.agent.utils.FileHandler;
 import com.shatteredpixel.shatteredpixeldungeon.agent.utils.directorHandler;
 import org.apache.poi.ss.usermodel.Cell;
@@ -14,14 +11,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.shatteredpixel.shatteredpixeldungeon.agent.Reporter.writeCsvFromXML;
-import static com.shatteredpixel.shatteredpixeldungeon.agent.Reporter.writeExcelFromXML;
+import static com.shatteredpixel.shatteredpixeldungeon.agent.legacyReporter.Reporter.writeCsvFromXML;
 
 
 public class mergeReporter {

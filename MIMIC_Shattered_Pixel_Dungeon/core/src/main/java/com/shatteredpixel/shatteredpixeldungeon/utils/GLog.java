@@ -21,10 +21,10 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.utils;
 
-import com.shatteredpixel.shatteredpixeldungeon.agent.reporter.ReporterClient;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.watabou.utils.DeviceCompat;
 import com.watabou.utils.Signal;
+import io.github.cdimascio.dotenv.Dotenv;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -46,9 +46,16 @@ public class GLog {
 
 	public static final String NEW_LINE	    = "\n";
 
+	private static final Dotenv DOTENV = Dotenv.configure()
+			.directory("../../")
+			.filename(".env")
+			.load();
+
+	private static final String AGENT_NAME = getRequiredEnv("AGENT_NAME");
+
 	public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
-	private static final String OUT_PATH = "../../out/SPD/logs/out_" + LocalDateTime.now().format(formatter) + "_" + ReporterClient.PREFIX + ".log";
-	private static final String COV_PATH = "../../out/SPD/cov_logs/cov_" + LocalDateTime.now().format(formatter) + "_" + ReporterClient.PREFIX + ".log";
+	private static final String OUT_PATH = "../../out/SPD/logs/out_" + LocalDateTime.now().format(formatter) + "_" + AGENT_NAME + ".log";
+	private static final String COV_PATH = "../../out/SPD/cov_logs/cov_" + LocalDateTime.now().format(formatter) + "_" + AGENT_NAME + ".log";
 	private static boolean isFirstLog = true;
 
 	// Reset
@@ -157,5 +164,13 @@ public class GLog {
 
 	public static void resetErrMsg() {
 		ERR_MSG = "";
+	}
+
+	private static String getRequiredEnv(String key) {
+		String value = DOTENV.get(key);
+		if (value == null || value.trim().isEmpty()) {
+			throw new IllegalStateException("Missing required env var: " + key + " in ../../.env");
+		}
+		return value;
 	}
 }
