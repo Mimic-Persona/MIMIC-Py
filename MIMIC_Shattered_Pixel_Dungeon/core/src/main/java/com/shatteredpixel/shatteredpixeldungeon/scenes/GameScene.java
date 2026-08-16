@@ -846,7 +846,7 @@ public class GameScene extends PixelScene {
 						Dungeon.gameServer.broadcast(feedback.toString());
 
 						if (IS_IN_EXP) {
-							JacocoRuntimeReporter.dumpData(Dungeon.actionCounter, Dungeon.prevAction.toString(), Dungeon.prevEnv);
+							JacocoRuntimeReporter.dumpData(Dungeon.agentActionCounter + 1, Dungeon.prevAction.toString(), Dungeon.prevEnv);
 						}
 
 //						GLog.c("======================================================================== Action #" + (actionCounter) + " ========================================================================");
